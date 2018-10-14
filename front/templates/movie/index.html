@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../../dist/css/index.min.css">
+	<!-- @@include('../include/header.html') -->
+</head>
+<body>
+	{% if movie_list %}
+		{% for movie in movie_list %}
+		<li>{{movie.title}}</li>
+		{% endfor%}
+	{% else %}
+		<strong>没有数据</strong>
+	{% endif%}
+	<!-- <img src="{% static 'css/assets/global/img/portfolio/1200x900/15.jpg' %}"> -->
+</body>
+</html>
