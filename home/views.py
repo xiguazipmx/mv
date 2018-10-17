@@ -6,4 +6,7 @@ from home.models import MvMovie
 def index(request):
 	movie_list = MvMovie.objects.all()
 	context = {'movie_list':movie_list}
-	return render(request, 'templates/movie/index.html',context)
+	return render(request, 'templates/movie/movie_maintain.html',context)
+
+def movie_detail(request):
+	render(request, 'templates/movie/movie_detail.html')
