@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!-->
@@ -7,44 +8,8 @@
     <!-- BEGIN HEAD -->
     <head>
         <title>Metronic Admin Theme #3 | Portfolio 1</title>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <meta content="Preview page of Metronic Admin Theme #3 for Portfolio 1 - Basic Grid" name="description" />
-        <meta content="" name="author" />
-        <script type="text/javascript">  
-            var curWwwPath = window.document.location.href;
-            var pathName = window.document.location.pathname;
-            var pos = curWwwPath.indexOf(pathName);
-            var ctx = curWwwPath.substring(0, pos);
-            console.log(curWwwPath)
-            console.log(ctx)
-        </script>
-        <!-- BEGIN GLOBAL MANDATORY STYLES -->
-        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
-        <link href="../../src/css/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-        <link href="../../src/css/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
-        <link href="../../src/css/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="../../src/css/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
-        <!-- END GLOBAL MANDATORY STYLES -->
-        <!-- BEGIN PAGE LEVEL PLUGINS -->
-        <link href="../../src/css/assets/global/plugins/cubeportfolio/css/cubeportfolio.css" rel="stylesheet" type="text/css" />
-        <!-- END PAGE LEVEL PLUGINS -->
-        <!-- BEGIN THEME GLOBAL STYLES -->
-        <link href="../../src/css/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
-        <link href="../../src/css/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
-        <!-- END THEME GLOBAL STYLES -->
-        <!-- BEGIN PAGE LEVEL STYLES -->
-        <link href="../../src/css/assets/pages/css/portfolio.min.css" rel="stylesheet" type="text/css" />
-        <!-- END PAGE LEVEL STYLES -->
-        <!-- BEGIN THEME LAYOUT STYLES -->
-        <link href="../../src/css/assets/layouts/layout3/css/layout.min.css" rel="stylesheet" type="text/css" />
-        <link href="../../src/css/assets/layouts/layout3/css/themes/default.min.css" rel="stylesheet" type="text/css" id="style_color" />
-        <link href="../../src/css/assets/layouts/layout3/css/custom.min.css" rel="stylesheet" type="text/css" />
-        <!-- END THEME LAYOUT STYLES -->
-        <link rel="shortcut icon" href="favicon.ico" />
-
-
+        {% include "templates/include/meta.html" %}
+        {% include "templates/include/include_css.html" %}
     </head>
     <!-- END HEAD -->
 
@@ -60,7 +25,7 @@
                                 <!-- BEGIN LOGO -->
                                 <div class="page-logo">
                                     <a href="index.html">
-                                        <img src="../../src/css/assets/layouts/layout3/img/logo-default.jpg" alt="logo" class="logo-default">
+                                        <img src="{% static 'css/assets/layouts/layout3/img/logo-default.jpg' %}" alt="logo" class="logo-default">
                                     </a>
                                 </div>
                                 <!-- END LOGO -->
@@ -164,22 +129,30 @@
                                     <div class="page-content-inner">
                                         <div class="portfolio-content portfolio-1">
                                             <div id="js-grid-juicy-projects" class="cbp">
-                                                <div class="cbp-item graphic">
-                                                    <div class="cbp-caption">
-                                                        <div class="cbp-caption-defaultWrap">
-                                                            <img src="../../src/css/assets/global/img/portfolio/600x600/013.jpg" alt=""> </div>
-                                                        <div class="cbp-caption-activeWrap">
-                                                            <div class="cbp-l-caption-alignCenter">
-                                                                <div class="cbp-l-caption-body">
-                                                                    <a href="../assets/global/plugins/cubeportfolio/ajax/project1.html" class="cbp-singlePage cbp-l-caption-buttonLeft btn red uppercase btn red uppercase" rel="nofollow">more info</a>
-                                                                    <a href="../../src/css/assets/global/img/portfolio/1200x900/57.jpg" class="cbp-lightbox cbp-l-caption-buttonRight btn red uppercase btn red uppercase" data-title="Dashboard<br>by Paul Flavius Nechita">view larger</a>
+
+                                                {% if movie_list %}
+                                                    {% for movie in movie_list %}
+                                                        <div class="cbp-item graphic">
+                                                            <div class="cbp-caption">
+                                                                <div class="cbp-caption-defaultWrap">
+                                                                    <img src="{{ movie.image }}" alt="{{ movie.title }}" style="width: 318px;height: 400px;" onerror="{% static 'images/gloabl_img.jpg' %}"> </div>
+                                                                <div class="cbp-caption-activeWrap">
+                                                                    <div class="cbp-l-caption-alignCenter">
+                                                                        <div class="cbp-l-caption-body">
+                                                                            <a href="../assets/global/plugins/cubeportfolio/ajax/project1.html" class="cbp-singlePage cbp-l-caption-buttonLeft btn red uppercase btn red uppercase" rel="nofollow">详细信息</a>
+                                                                            <a href="{{ movie.image }}" class="cbp-lightbox cbp-l-caption-buttonRight btn red uppercase btn red uppercase" data-title="{{ movie.title }}<br>类型：{{ movie.genres }}">查看大图</a>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
+                                                            <div class="cbp-l-grid-projects-title uppercase text-center uppercase text-center">{{ movie.title }}</div>
+                                                            <div class="cbp-l-grid-projects-desc uppercase text-center uppercase text-center">{{ movie.original_title }} / {{ movie.year }}</div>
                                                         </div>
-                                                    </div>
-                                                    <div class="cbp-l-grid-projects-title uppercase text-center uppercase text-center">Dashboard</div>
-                                                    <div class="cbp-l-grid-projects-desc uppercase text-center uppercase text-center">Web Design / Graphic</div>
-                                                </div>
+                                                    {% endfor %}
+                                                {% else %}
+		                                            <strong>没有数据</strong>
+                                                {% endif %}
+
                                             </div>
                                             <div id="js-loadMore-juicy-projects" class="cbp-l-loadMore-button">
                                                 <a href="../assets/global/plugins/cubeportfolio/ajax/loadMore.html" class="cbp-l-loadMore-link btn grey-mint btn-outline" rel="nofollow">
@@ -277,34 +250,7 @@
                 </div>
             </div>
         </div>
-        <!--[if lt IE 9]>
-<script src="../assets/global/plugins/respond.min.js"></script>
-<script src="../assets/global/plugins/excanvas.min.js"></script> 
-<script src="../assets/global/plugins/ie8.fix.min.js"></script> 
-<![endif]-->
-        <!-- BEGIN CORE PLUGINS -->
-        <script src="../../src/css/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
-        <script src="../../src/css/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="../../src/css/assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
-        <script src="../../src/css/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-        <script src="../../src/css/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
-        <script src="../../src/css/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
-        <!-- END CORE PLUGINS -->
-        <!-- BEGIN PAGE LEVEL PLUGINS -->
-        <script src="../../src/css/assets/global/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js" type="text/javascript"></script>
-        <!-- END PAGE LEVEL PLUGINS -->
-        <!-- BEGIN THEME GLOBAL SCRIPTS -->
-        <script src="../../src/css/assets/global/scripts/app.min.js" type="text/javascript"></script>
-        <!-- END THEME GLOBAL SCRIPTS -->
-        <!-- BEGIN PAGE LEVEL SCRIPTS -->
-        <script src="../../src/css/assets/pages/scripts/portfolio-1.min.js" type="text/javascript"></script>
-        <!-- END PAGE LEVEL SCRIPTS -->
-        <!-- BEGIN THEME LAYOUT SCRIPTS -->
-        <script src="../../src/css/assets/layouts/layout3/scripts/layout.min.js" type="text/javascript"></script>
-        <script src="../../src/css/assets/layouts/layout3/scripts/demo.min.js" type="text/javascript"></script>
-        <script src="../../src/css/assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
-        <script src="../../src/css/assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
-        <!-- END THEME LAYOUT SCRIPTS -->
+        {% include "templates/include/include_js.html" %}
     </body>
 
 </html>
