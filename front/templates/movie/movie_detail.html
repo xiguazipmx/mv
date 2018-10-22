@@ -1,6 +1,6 @@
 <div class="portfolio-content">
-    <div class="cbp-l-project-title">Dashboard</div>
-    <div class="cbp-l-project-subtitle">by Paul Flavius Nechita</div>
+    <div class="cbp-l-project-title">{{ movie_detail.title }}</div>
+    <div class="cbp-l-project-subtitle"><strong>导演：</strong>{{ director.name }}</div>
     <div class="cbp-slider">
         <ul class="cbp-slider-wrap">
             <li class="cbp-slider-item">
@@ -20,7 +20,7 @@
     <div class="cbp-l-project-container">
         <div class="cbp-l-project-desc">
             <div class="cbp-l-project-desc-title">
-                <span>Project Description</span>
+                <span>电影简介</span>
             </div>
             <div class="cbp-l-project-desc-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, cumque, earum blanditiis incidunt minus commodi consequatur provident quae. Nihil, alias, vel consequatur ab aliquam aspernatur optio harum facilis excepturi mollitia autem
                 voluptas cum ex veniam numquam quia repudiandae in iure. Assumenda, vel provident molestiae perferendis officia commodi asperiores earum sapiente inventore quam deleniti mollitia consequatur expedita quaerat natus praesentium beatae aut
@@ -28,15 +28,16 @@
         </div>
         <div class="cbp-l-project-details">
             <div class="cbp-l-project-details-title">
-                <span>Project Details</span>
+                <span>演员表：</span>
             </div>
             <ul class="cbp-l-project-details-list">
-                <li>
-                    <strong>Client</strong>John Doe</li>
-                <li>
-                    <strong>Date</strong>22 December 2013</li>
-                <li>
-                    <strong>Categories</strong>Logo, Graphic</li>
+                {% if  avatar_list %}
+                    {% for avatar in avatar_list %}
+                        <li><strong>主演</strong>{{ avatar.name }}</li>
+                    {% endfor %}
+                {% else %}
+                    <strong>没有数据</strong>
+                {% endif %}
             </ul>
             <a href="#" target="_blank" class="cbp-l-project-details-visit btn red uppercase">visit the site</a>
         </div>
